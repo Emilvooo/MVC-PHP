@@ -1,0 +1,30 @@
+body {
+	margin: 40px;
+}
+
+header{
+	font-size: larger;
+	font-weight: bolder;
+}
+
+main {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top: 1px #000 solid;
+	border-bottom: 1px #000 solid;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+footer {
+	font-size: smaller;
+}
+
+
+.marg-bot {
+	   margin-bottom: 2rem;
+	   background-color: white;
+	   -webkit-box-shadow: 0 4px 6px -6px #222;
+	   -moz-box-shadow: 0 4px 6px -6px #222;
+	   box-shadow: 0 4px 6px -6px #222;
+}
