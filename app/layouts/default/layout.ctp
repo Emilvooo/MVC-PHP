@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="http://emilvooo.nl/library/css/main.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
+    <?php
+        if ($_SERVER['SERVER_ADDR'] != '141.138.168.125') {
+            echo '<h5><center>LOCALHOST</center></h5>';
+        }
+    ?>
     <nav class="navbar navbar-inverse marg-bot">
         <div class="container">
             <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
