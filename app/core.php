@@ -54,7 +54,7 @@ class Core
             }
         }
         else {
-            echo 'File: <strong>'.$controller_path.'</strong> bestaat niet!';
+            echo 'File: <strong>'.str_replace('../app/controllers/', '', $controller_path).'</strong> bestaat niet!';
         }
     }
 
@@ -63,7 +63,7 @@ class Core
         // Controller variables beschikbaar maken in de view en de layout.
         extract($this->controller->variables);
 
-        // View inladen.
+        // View inladen.1
         ob_start();
         $controller_name = str_replace('Controller', '', get_class($this->controller));
         $parts = explode('\\', $controller_name);
