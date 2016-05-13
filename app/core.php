@@ -45,17 +45,9 @@ class Core
                     $this->content = $this->startView();
                     return;
                 }
-                else {
-                    echo 'Method: <strong>'.$action.'</strong> bestaat niet!';
-                }
-            }
-            else {
-                echo 'Class: <strong>'.$controller.'Controller</strong> bestaat niet!';
             }
         }
-        else {
-            echo 'File: <strong>'.str_replace('../app/controllers/', '', $controller_path).'</strong> bestaat niet!';
-        }
+        $this->redirect('/error');
     }
 
     private function startView()
@@ -63,7 +55,7 @@ class Core
         // Controller variables beschikbaar maken in de view en de layout.
         extract($this->controller->variables);
 
-        // View inladen.1
+        // View inladen
         ob_start();
         $controller_name = str_replace('Controller', '', get_class($this->controller));
         $parts = explode('\\', $controller_name);

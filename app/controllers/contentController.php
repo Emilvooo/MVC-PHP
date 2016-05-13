@@ -7,6 +7,7 @@ class contentController extends Controller
 {
     public function index() {
         $this->set('pageTitle', 'Welkom!');
+        $this->set('content', '<h5>Welkom!</h5>');
     }
 
     public function detail() {

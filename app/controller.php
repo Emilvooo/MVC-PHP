@@ -1,8 +1,6 @@
 <?php
 namespace App;
 
-use App\Core;
-
 class Controller
 {
     public $core = null;
