@@ -32,7 +32,7 @@ class News
     public function deleteNews($news_id) {
         $db = db::getInstance();
         $result = $db->prepare('DELETE FROM posts WHERE id = '.$news_id.'');
-        $result->execute(array('id' => $id));
+        $result->execute(array('id' => $news_id));
 
         return $result;
     }
