@@ -7,7 +7,6 @@ class errorController extends Controller
 {
     public function index() {
         $this->set('content', 'Deze pagina bestaat niet.');
-        $this->set('pageTitle', '404');
     }
 }
 
