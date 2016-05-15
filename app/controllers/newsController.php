@@ -6,17 +6,21 @@ use App\Models\News;
 
 class newsController extends Controller
 {
-    public function overview() {
-        $news = new News();
-        $data = $news->loadAll();
+    private $news = null;
+    private $news_id = null;
 
+    public function __construct(){
+        $this->news = new News();
+        $this->news_id = $this->core->params['id'];
+    }
+
+    public function overview() {
+        $data = $this->news->loadAll();
         $this->set('data', $data);
     }
 
     public function detail() {
-        $news_id = $this->core->params['id'];
-        $news = new News();
-        $data = $news->loadById($news_id);
+        $data = $this->news->loadById($this->news_id);
 
         if(!isset($data[0]['id'])) {
             $this->core->redirect('/error');
@@ -35,15 +39,12 @@ class newsController extends Controller
     }
 
     public function delete() {
-        $news = new News();
-        $news_id = $this->core->params['id'];
-
         if(!empty($_POST)) {
-            $news->deleteNews($news_id);
+            $this->news->deleteNews($this->news_id);
             $this->core->redirect('/news/overview');
         }
 
-        $data = $news->loadById($news_id);
+        $data = $this->news->loadById($this->news_id);
         $this->set('data', $data);
     }
 }
