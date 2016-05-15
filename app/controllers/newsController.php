@@ -7,6 +7,9 @@ use App\Models\News;
 class newsController extends Controller
 {
     public function __construct() {
+        $news_id = $this->core->params['id'];
+        $news = new News();
+        $data = $news->loadById($news_id);
         $this->set('pageTitle', 'MVC || '.$data[0]['title']);
     }
 
