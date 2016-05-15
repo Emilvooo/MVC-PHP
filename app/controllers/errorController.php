@@ -7,7 +7,7 @@ class errorController extends Controller
 {
     public function __construct($core){
         parent::__construct($core);
-        $this->set('pageTitle', 'MVC || Error');
+        $this->set('pageTitle', 'EMILVOOO || Error');
     }
 
     public function index() {

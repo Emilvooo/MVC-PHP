@@ -13,7 +13,6 @@ class newsController extends Controller
         parent::__construct($core);
         $this->news = new News();
         $this->news_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
-
     }
 
     public function overview() {

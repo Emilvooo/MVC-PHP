@@ -9,7 +9,7 @@ class Controller
     public function __construct(Core $core)
     {
         $this->core = $core;
-        $this->set('pageTitle', 'MVC || '.ucfirst(isset($this->core->params['controller']) ? $this->core->params['controller'] : 'Home'));
+        $this->set('pageTitle', 'EMILVOOO || '.ucfirst(isset($this->core->params['controller']) ? $this->core->params['controller'] : 'Home'));
     }
 
     public function set($var, $value)
