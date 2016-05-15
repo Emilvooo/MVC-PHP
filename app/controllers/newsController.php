@@ -18,7 +18,7 @@ class newsController extends Controller
         $news = new News();
         $data = $news->loadById($news_id);
 
-        if(!isset($data[0]['id'])) {
+        if(!isset($news_id)) {
             $this->core->redirect('/error');
         }
 
