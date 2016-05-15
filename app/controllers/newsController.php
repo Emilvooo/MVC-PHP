@@ -14,7 +14,7 @@ class newsController extends Controller
     }
 
     public function detail() {
-        $news_id = $this->core->params['id'];
+        $news_id = $this->core->params['title'];
         $news = new News();
         $data = $news->loadById($news_id);
 

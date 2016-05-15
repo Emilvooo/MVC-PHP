@@ -16,7 +16,7 @@
                     <td>'.$row['title'].'</td>
                     <td>'.$row['content'].'</td>
                     <td>
-                        <a href="/news/detail/'.$row['id'].'" class="btn btn-info">Show</a>
+                        <a href="/news/detail/'.$row['title'].'" class="btn btn-info">Show</a>
                         <a href="/news/delete/'.$row['id'].'" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>';
