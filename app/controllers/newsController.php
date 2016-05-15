@@ -6,6 +6,10 @@ use App\Models\News;
 
 class newsController extends Controller
 {
+    public function __construct() {
+        $this->set('pageTitle', 'MVC || '.$data[0]['title']);
+    }
+
     public function overview() {
         $news = new News();
         $data = $news->loadAll();
@@ -22,6 +26,7 @@ class newsController extends Controller
             $this->core->redirect('/error');
         }
 
+        $this->set('pageTitle', 'MVC || '.$data[0]['title']);
         $this->set('data', $data);
     }
 
