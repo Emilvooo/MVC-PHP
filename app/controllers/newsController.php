@@ -8,7 +8,8 @@ class newsController extends Controller
 {
     private $news = null;
 
-    public function __construct(){
+    public function __construct($core){
+        parent::__construct($core);
         $this->news = new News();
     }
 

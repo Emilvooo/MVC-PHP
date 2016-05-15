@@ -5,7 +5,8 @@ use App\Controller;
 
 class errorController extends Controller
 {
-    public function __construct(){
+    public function __construct($core){
+        parent::__construct($core);
         $this->set('pageTitle', 'MVC || Error');
     }
 
