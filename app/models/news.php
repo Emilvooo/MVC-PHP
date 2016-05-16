@@ -15,7 +15,7 @@ class News
 
     public function loadById($news_id) {
         $db = db::getInstance();
-        $query = $db->query('SELECT * FROM posts WHERE id = '.$news_id.'');
+        $query = $db->query('SELECT * FROM posts WHERE id = '.$news_id);
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);
 
         return $result;
@@ -29,9 +29,17 @@ class News
         return $result;
     }
 
+    public function editNews($news_id, $author, $title, $content) {
+        $db = db::getInstance();
+        $result = $db->prepare('UPDATE posts SET author=:author, title=:title, content=:content WHERE id= '.$news_id);
+        $result->execute(array(':author'=>$author, ':title'=>$title, ':content'=>$content));
+
+        return $result;
+    }
+
     public function deleteNews($news_id) {
         $db = db::getInstance();
-        $result = $db->prepare('DELETE FROM posts WHERE id = '.$news_id.'');
+        $result = $db->prepare('DELETE FROM posts WHERE id = '.$news_id);
         $result->execute(array('id' => $news_id));
 
         return $result;

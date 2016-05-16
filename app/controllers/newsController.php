@@ -6,8 +6,8 @@ use App\Models\News;
 
 class newsController extends Controller
 {
-    public $news;
-    public $news_id;
+    public $news = null;
+    public $news_id = null;
 
     public function __construct($core){
         parent::__construct($core);
@@ -26,17 +26,24 @@ class newsController extends Controller
         if(!isset($data[0]['id'])) {
             $this->core->redirect('/error');
         }
-
-        $this->set('pageTitle', 'MVC || '.$data[0]['title']);
+        $this->set('pageTitle', 'EMILVOOO || '.$data[0]['title']);
         $this->set('data', $data);
     }
 
     public function add() {
         if(!empty($_POST)) {
-            $news = new News();
-            $news->addNews($_POST['author'], $_POST['title'], $_POST['content']);
+            $this->news->addNews($_POST['author'], $_POST['title'], $_POST['content']);
             $this->core->redirect('/news/overview');
         }
+    }
+
+    public function edit() {
+        if(!empty($_POST)) {
+            $this->news->editNews($this->news_id, $_POST['author'], $_POST['title'], $_POST['content']);
+            $this->core->redirect('/news/overview');
+        }
+        $data = $this->news->loadById($this->news_id);
+        $this->set('data', $data);
     }
 
     public function delete() {
@@ -44,7 +51,6 @@ class newsController extends Controller
             $this->news->deleteNews($this->news_id);
             $this->core->redirect('/news/overview');
         }
-
         $data = $this->news->loadById($this->news_id);
         $this->set('data', $data);
     }
