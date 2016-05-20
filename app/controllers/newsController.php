@@ -21,28 +21,27 @@ class newsController extends Controller
     public function detail() {
         $news_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
         $data = $this->news->loadById($news_id);
-
         if(!isset($data[0]['id'])) {
             $this->core->redirect('/error');
         }
-        $this->set('pageTitle', 'EMILVOOO || '.$data[0]['title']);
         $this->set('data', $data);
     }
 
     public function add() {
-        if(!empty($_POST)) {
-            $this->news->addNews($_POST['author'], $_POST['title'], $_POST['content']);
-            $this->core->redirect('/news/overview');
-        }
-    }
-
-    public function edit() {
         $news_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
         if(!empty($_POST)) {
-            $this->news->editNews($news_id, $_POST['author'], $_POST['title'], $_POST['content']);
-            $this->core->redirect('/news/overview');
+            if(!isset($news_id)) {
+                $this->news->addNews($_POST['author'], $_POST['title'], $_POST['content']);
+                $this->core->redirect('/news/overview');
+            }
+            else {
+                $this->news->editNews($news_id, $_POST['author'], $_POST['title'], $_POST['content']);
+                $this->core->redirect('/news/overview');
+            }
         }
-        $data = $this->news->loadById($news_id);
+        if(isset($news_id)) {
+            $data = $this->news->loadById($news_id);
+        }
         $this->set('data', $data);
     }
 
