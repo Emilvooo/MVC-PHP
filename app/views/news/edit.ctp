@@ -1,4 +1,3 @@
-<?php echo $_GET['id'] ?>
 <div class="container">
     <a class="btn btn-info" href="/news/overview">Terug naar het overzicht</a>
     <form class="marg-top" method="post">
