@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title><?php echo $pageTitle; ?></title>
+    <title><?php echo 'EMILVOOO || '.$pageName; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
@@ -23,10 +23,8 @@
         </div>
     </nav>
     <div class="container">
-        <?php
-            echo $panelTitle;
-            echo $this->content;
-        ?>
+        <h4 class="panel-title-heading"><?php echo $pageName; ?></h4>
+        <?php echo $this->content; ?>
     </div>
     <script rel="script" src="/js/core.js"></script>
 </body>
