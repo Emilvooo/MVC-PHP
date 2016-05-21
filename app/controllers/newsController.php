@@ -32,12 +32,11 @@ class newsController extends Controller
         if(!empty($_POST)) {
             if(!isset($news_id)) {
                 $this->news->addNews($_POST['author'], $_POST['title'], $_POST['content']);
-                $this->core->redirect('/news/overview');
             }
             else {
                 $this->news->editNews($news_id, $_POST['author'], $_POST['title'], $_POST['content']);
-                $this->core->redirect('/news/overview');
             }
+            $this->core->redirect('/news/overview');
         }
         if(isset($news_id)) {
             $data = $this->news->loadById($news_id);

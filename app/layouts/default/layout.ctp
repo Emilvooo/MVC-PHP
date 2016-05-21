@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title><?=$pageTitle?></title>
+    <title><?php echo $pageTitle; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
@@ -16,13 +16,18 @@
                 <ul class="nav navbar-nav">
                     <li class="nav-item"><a href="/">Home</a></li>
                     <li class="nav-item"><a href="/news/overview">Nieuws</a></li>
-                    <li class="nav-item"><a href="/gallery/overview">Gallery</a></li>
-                    <li class="nav-item"><a href="/contact/overview">Contact</a></li>
+                    <li class="nav-item"><a href="/gallery/index">Gallery</a></li>
+                    <li class="nav-item"><a href="/contact/index">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <?php echo $this->content; ?>
+    <div class="container">
+        <?php
+            echo $panelTitle;
+            echo $this->content;
+        ?>
+    </div>
     <script rel="script" src="/js/core.js"></script>
 </body>
 </html>
