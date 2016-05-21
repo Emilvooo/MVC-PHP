@@ -5,3 +5,7 @@
 .panel-title-heading {
     padding: 0 0 20px 0 !important;
 }
+
+.img-thumbnail {
+    margin-right: 10px !important;
+}

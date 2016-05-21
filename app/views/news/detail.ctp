@@ -1,4 +1,4 @@
-<a class="btn btn-info" href="/news/overview">Terug naar het overzicht</a>
+<a class="btn btn-info" href="/news/overview">Back</a>
 <p>
     <?php
     foreach($data as $row) {

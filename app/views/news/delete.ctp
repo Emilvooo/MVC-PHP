@@ -1,4 +1,4 @@
-<a class="btn btn-primary" href="/news/overview">Terug naar het overzicht</a>
+<a class="btn btn-primary" href="/news/overview">Back</a>
 <form class="marg-top" method="post">
     <div class="input-group">
         <pre><?php print_r($data) ?></pre>
