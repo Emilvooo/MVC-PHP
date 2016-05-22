@@ -1,4 +1,3 @@
-<a class="btn btn-info" href="/news/overview">Back</a>
 <form class="marg-top" method="post">
     <div class="input-group">
         <label for="auteur">Auteur:</label>

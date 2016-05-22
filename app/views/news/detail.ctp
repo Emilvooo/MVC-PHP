@@ -1,4 +1,3 @@
-<a class="btn btn-info" href="/news/overview">Back</a>
 <p>
     <?php
     foreach($data as $row) {

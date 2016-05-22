@@ -6,7 +6,7 @@ use App\Controller;
 class galleryController extends Controller
 {
     public function index() {
-        $dir = "../mvc/images/*.jpg";
+        $dir = "../mvc/images/*";
         $images = glob($dir);
         $images = str_replace('mvc/', '', $images);
         $this->set('images', $images);

@@ -1,4 +1,3 @@
-<a href="/news/add" class="btn btn-info">Add</a>
 <table class="table">
     <tr>
         <th>Naam</th>
