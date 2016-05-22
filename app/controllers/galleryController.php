@@ -2,33 +2,35 @@
 namespace App\Controllers;
 
 use App\Controller;
+use App\Models\Gallery;
 
 class galleryController extends Controller
 {
+    public $gallery = null;
+
+    public function __construct($core){
+        parent::__construct($core);
+        $this->gallery = new Gallery();
+    }
+
     public function index() {
-        $dir = "../mvc/images/*";
-        $images = glob($dir);
-        $images = str_replace('mvc/', '', $images);
-        $this->set('images', $images);
+        $data = $this->gallery->loadAll();
+        $this->set('data', $data);
     }
 
     public function add() {
         if(!empty($_POST)) {
-            $target_dir = "../mvc/images/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $uploadOk = 1;
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-                $this->set('message', 'Sorry, your file was not uploaded');
-            } 
-            else {
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    $this->set('message', 'The file '.basename( $_FILES["fileToUpload"]["name"]).' has been uploaded.');
-                } 
-                else {
-                    $this->set('message', 'Sorry, there was an error uploading your file.');
-                }
-            }
+            $target_file = basename($_FILES["fileToUpload"]["name"]);
+            move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], '../mvc/images/'.$target_file);
+            $this->gallery->addImage($target_file);
+            $this->set('message', 'The file '.$target_file.' has been uploaded.');
+        }
+    }
+
+    public function delete() {
+        $image_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
+        if(!empty($_POST)) {
+            $this->gallery->deleteImage($image_id);
         }
     }
 }
