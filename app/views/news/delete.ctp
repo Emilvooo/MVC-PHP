@@ -1,4 +1,4 @@
-<form class="marg-top" method="post">
+<form method="post">
     <div class="input-group">
         <pre><?php print_r($data) ?></pre>
         <input class="btn btn-danger" type="submit" name="submit" value="Delete">

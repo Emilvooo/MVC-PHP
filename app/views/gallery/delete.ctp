@@ -1,6 +1,6 @@
-<form class="marg-top" method="post">
+<form method="post">
     <div class="input-group">
-        <pre><?php print_r($image) ?></pre>
+        <pre><?php if(!empty($message)) { print_r($message); }?></pre>
         <input class="btn btn-danger" type="submit" name="submit" value="Delete">
     </div>
 </form>

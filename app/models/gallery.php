@@ -13,6 +13,14 @@ class Gallery
         return $result;
     }
 
+    public function loadById($image_id) {
+        $db = db::getInstance();
+        $query = $db->query('SELECT path FROM gallery WHERE id = '.$image_id);
+        $result = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     public function addImage($path) {
         $db = db::getInstance();
         $result = $db->prepare('INSERT INTO gallery (path) VALUES (:path)');
