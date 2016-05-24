@@ -40,8 +40,8 @@ class newsController extends Controller
         }
         if(isset($news_id)) {
             $data = $this->news->loadById($news_id);
+            $this->set('data', $data);
         }
-        $this->set('data', $data);
     }
 
     public function delete() {

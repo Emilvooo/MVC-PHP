@@ -1,7 +1,17 @@
 <a href="/gallery/add" class="btn btn-info">Add</a><br>
-<?php
+<div class="row">
+    <?php
     foreach($data as $row) {
-        echo '<img src="../images/'.$row['path'].'" class="img-thumbnail" width="250" height="250">';
-        echo '<p><a href="/gallery/delete/'.$row['id'].'">Delete</a></p>';
+        echo '
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="../images/'.$row['path'].'" class="img-thumbnail">
+                    <div class="caption">
+                         <p></p>
+                        <p><a href="/gallery/delete/'.$row['id'].'" class="btn btn-danger btn-sm" role="button">Delete</a></p>
+                    </div>
+                </div>
+            </div>';
     }
-?>
+    ?>
+</div>

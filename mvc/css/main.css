@@ -8,4 +8,6 @@
 
 .img-thumbnail {
     margin-right: 10px !important;
+    height: 150px !important;
+    width: 250px !important;
 }

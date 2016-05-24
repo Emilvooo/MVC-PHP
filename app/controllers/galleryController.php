@@ -20,10 +20,15 @@ class galleryController extends Controller
 
     public function add() {
         if(!empty($_POST)) {
-            $target_file = basename($_FILES["fileToUpload"]["name"]);
-            move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], '../mvc/images/'.$target_file);
-            $this->gallery->addImage($target_file);
-            $this->set('message', 'The file '.$target_file.' has been uploaded.');
+            $total = count($_FILES['files']['name']);
+            for($i=0; $i<$total; $i++) {
+                $ext = explode('.', basename($_FILES['files']['name'][$i]));
+                $newFilePath = '../mvc/images/'.md5(uniqid()).'.'.$ext[count($ext) - 1];
+                if(move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFilePath)) {
+                    $this->set('message', 'The images have been uploaded.');
+                    $this->gallery->addImage(str_replace('../mvc/images/', '', $newFilePath));
+                }
+            }
         }
     }
 
@@ -42,3 +47,6 @@ class galleryController extends Controller
     }
 }
 ?>
+
+
+
