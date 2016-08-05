@@ -5,6 +5,7 @@ class Controller
 {
     public $core = null;
     public $variables = array();
+    public $menu = array();
 
     public function __construct(Core $core)
     {

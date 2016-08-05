@@ -23,7 +23,6 @@ class Core
     {
         $controller = isset($this->params['controller']) ? $this->params['controller'] : 'content';
         $action = isset($this->params['action']) ? $this->params['action'] : 'index';
-
         $controller_path = '../app/controllers/'.$controller.'Controller.php';
 
         // Bestaat de controller file?
