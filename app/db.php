@@ -8,7 +8,7 @@ class Db {
     {
         if (!isset(self::$instance))
         {
-            if ($_SERVER['SERVER_ADDR'] == '141.138.168.125')
+            if ($_SERVER['SERVER_ADDR'] == '141.138.168.1')
             {
                 $host = 'localhost';
             }
@@ -16,7 +16,7 @@ class Db {
             {
                 $host = '141.138.168.125';
             }
-            self::$instance = new \PDO('mysql:host='.$host.';dbname=deb10192_mvc', 'deb10192_emil', 'hoi123');
+            self::$instance = new \PDO('mysql:host='.$host.';dbname=deb10192_emildb', 'deb10192_emil', 'hoi123');
         }
         return self::$instance;
     }
