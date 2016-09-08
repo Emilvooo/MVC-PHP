@@ -8,7 +8,7 @@ class Db {
     {
         if (!isset(self::$instance))
         {
-            if ($_SERVER['SERVER_ADDR'] == '141.138.168.1')
+            if ($_SERVER['SERVER_ADDR'] == '141.138.168.125')
             {
                 $host = 'localhost';
             }
