@@ -13,15 +13,15 @@ class Gallery
         return $result;
     }
 
-    public function loadById($image_id) {
+    public function loadById($id) {
         $db = db::getInstance();
-        $query = $db->query('SELECT path FROM gallery WHERE id = '.$image_id);
+        $query = $db->query('SELECT * FROM gallery WHERE id = '.$id);
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);
 
         return $result;
     }
 
-    public function addImage($path) {
+    public function addData($path) {
         $db = db::getInstance();
         $result = $db->prepare('INSERT INTO gallery (path) VALUES (:path)');
         $result->execute(array(':path'=>$path));
@@ -29,10 +29,10 @@ class Gallery
         return $result;
     }
 
-    public function deleteImage($image_id) {
+    public function deleteData($id) {
         $db = db::getInstance();
-        $result = $db->prepare('DELETE FROM gallery WHERE id = '.$image_id);
-        $result->execute(array('id' => $image_id));
+        $result = $db->prepare('DELETE FROM gallery WHERE id = '.$id);
+        $result->execute(array('id' => $id));
 
         return $result;
     }

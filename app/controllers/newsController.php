@@ -22,8 +22,8 @@ class newsController extends Controller
 
     public function detail()
     {
-        $news_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
-        $data = $this->news->loadById($news_id);
+        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
+        $data = $this->news->loadById($id);
         if(!isset($data[0]['id']))
         {
             $this->core->redirect('/error');
@@ -33,35 +33,35 @@ class newsController extends Controller
 
     public function add()
     {
-        $news_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
+        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
         if(!empty($_POST))
         {
-            if(!isset($news_id))
+            if(!isset($id))
             {
-                $this->news->addNews($_POST['author'], $_POST['title'], $_POST['content']);
+                $this->news->addData($_POST);
             }
             else
             {
-                $this->news->editNews($news_id, $_POST['author'], $_POST['title'], $_POST['content']);
+                $this->news->editData($id, $_POST);
             }
             $this->core->redirect('/news/overview');
         }
-        if(isset($news_id))
+        if(isset($id))
         {
-            $data = $this->news->loadById($news_id);
+            $data = $this->news->loadById($id);
             $this->set('data', $data);
         }
     }
 
     public function delete()
     {
-        $news_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
+        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
         if(!empty($_POST))
         {
-            $this->news->deleteNews($news_id);
+            $this->news->deleteData($id);
             $this->core->redirect('/news/overview');
         }
-        $data = $this->news->loadById($news_id);
+        $data = $this->news->loadById($id);
         $this->set('data', $data);
     }
 }

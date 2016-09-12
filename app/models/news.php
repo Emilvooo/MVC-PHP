@@ -13,34 +13,34 @@ class News
         return $result;
     }
 
-    public function loadById($news_id) {
+    public function loadById($id) {
         $db = db::getInstance();
-        $query = $db->query('SELECT * FROM posts WHERE id = '.$news_id);
+        $query = $db->query('SELECT * FROM posts WHERE id = '.$id);
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);
 
         return $result;
     }
 
-    public function addNews($author, $title, $content) {
+    public function addData($get_data) {
         $db = db::getInstance();
         $result = $db->prepare('INSERT INTO posts (author, title, content) VALUES (:author, :title, :content)');
-        $result->execute(array(':author'=>$author, ':title'=>$title, ':content'=>$content));
+        $result->execute(array(':author'=>$get_data['author'], ':title'=>$get_data['title'], ':content'=>$get_data['content']));
 
         return $result;
     }
 
-    public function editNews($news_id, $author, $title, $content) {
+    public function editData($id, $get_data) {
         $db = db::getInstance();
-        $result = $db->prepare('UPDATE posts SET author=:author, title=:title, content=:content WHERE id= '.$news_id);
-        $result->execute(array(':author'=>$author, ':title'=>$title, ':content'=>$content));
+        $result = $db->prepare('UPDATE posts SET author=:author, title=:title, content=:content WHERE id= '.$id);
+        $result->execute(array(':author'=>$get_data['author'], ':title'=>$get_data['title'], ':content'=>$get_data['content']));
 
         return $result;
     }
 
-    public function deleteNews($news_id) {
+    public function deleteData($id) {
         $db = db::getInstance();
-        $result = $db->prepare('DELETE FROM posts WHERE id = '.$news_id);
-        $result->execute(array('id' => $news_id));
+        $result = $db->prepare('DELETE FROM posts WHERE id = '.$id);
+        $result->execute(array('id' => $id));
 
         return $result;
     }

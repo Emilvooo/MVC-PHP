@@ -32,7 +32,7 @@ class galleryController extends Controller
                 if(move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFilePath))
                 {
                     $this->set('message', 'The images have been uploaded.');
-                    $this->gallery->addImage(str_replace('../mvc/images/', '', $newFilePath));
+                    $this->gallery->addData(str_replace('../mvc/images/', '', $newFilePath));
                 }
             }
         }
@@ -40,18 +40,18 @@ class galleryController extends Controller
 
     public function delete()
     {
-        $image_id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
+        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
         if(!empty($_POST))
         {
-            $file_path = $this->gallery->loadById($image_id);
+            $file_path = $this->gallery->loadById($id);
             $file = '../mvc/images/'.$file_path[0]['path'];
             if (unlink($file))
             {
-                $this->gallery->deleteImage($image_id);
+                $this->gallery->deleteData($id);
                 $this->core->redirect('/gallery/index');
             }
         }
-        $data = $this->gallery->loadById($image_id);
+        $data = $this->gallery->loadById($id);
         $this->set('message', $data);
     }
 }

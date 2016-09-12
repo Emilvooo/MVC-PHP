@@ -44,12 +44,17 @@ class Core
                     $this->content = $this->startView();
                     return;
                 }
+                // Fix voor API
+                else {
+                    $this->content = $this->startView(true);
+                    return;
+                }
             }
         }
         $this->redirect('/error');
     }
 
-    private function startView()
+    private function startView($api = false)
     {
         // Controller variables beschikbaar maken in de view en de layout.
         extract($this->controller->variables);
@@ -62,13 +67,19 @@ class Core
         include('../app/views/'.$controller_name.'/'.$this->action.'.ctp');
         $this->content = ob_get_clean();
 
-        // Layout inladen.
-        ob_start();
-        include('../app/layouts/default/layout.ctp');
-        $site = ob_get_clean();
+        // // Layout inladen
+        if($api == false) {
+            ob_start();
+            include('../app/layouts/default/layout.ctp');
+            $site = ob_get_clean();
 
-        // Layout + view returnen.
-        return $site;
+            // Layout + view returnen.
+            return $site;
+        }
+        else {
+            // Content returnen voor API
+            return $this->content;
+        }
     }
 
     public function redirect($uri)
