@@ -56,19 +56,19 @@ class Core
 
     private function startView($api = false)
     {
-        // Controller variables beschikbaar maken in de view en de layout.
-        extract($this->controller->variables);
-
-        // View inladen
-        ob_start();
-        $controller_name = str_replace('Controller', '', get_class($this->controller));
-        $parts = explode('\\', $controller_name);
-        $controller_name = end($parts);
-        include('../app/views/'.$controller_name.'/'.$this->action.'.ctp');
-        $this->content = ob_get_clean();
-
-        // // Layout inladen
         if($api == false) {
+            // Controller variables beschikbaar maken in de view en de layout.
+            extract($this->controller->variables);
+
+            // View inladen
+            ob_start();
+            $controller_name = str_replace('Controller', '', get_class($this->controller));
+            $parts = explode('\\', $controller_name);
+            $controller_name = end($parts);
+            include('../app/views/'.$controller_name.'/'.$this->action.'.ctp');
+            $this->content = ob_get_clean();
+
+            // Layout inladen
             ob_start();
             include('../app/layouts/default/layout.ctp');
             $site = ob_get_clean();
@@ -77,8 +77,9 @@ class Core
             return $site;
         }
         else {
-            // Content returnen voor API
-            return $this->content;
+            // JSON returnen voor API
+            header('Content-Type: application/json');
+            return $this->controller->variables['json'];
         }
     }
 

@@ -13,67 +13,71 @@ class apiController extends Controller
     public function __construct($core)
     {
         parent::__construct($core);
-        $this->news = new News();
-        $this->gallery = new Gallery();
+        $this->startModels();
+    }
+
+    public function startModels()
+    {
+        if ($_GET['action'] == 'news') {
+            $this->news = new News();
+        }
+        elseif ($_GET['action'] == 'gallery') {
+            $this->gallery = new Gallery();
+        }
+        else {
+            $this->core->redirect('/error');
+        }
         $this->apiHandler($_GET['action']);
     }
 
-    public function index() {
-        $this->set('content', 'Welcome!');
-    }
-
-    public function apiHandler($model) {
-        $objects = array('news', 'gallery');
-        if (in_array($model, $objects)) {
-            $data = $this->$model->loadAll();
-            if (isset($_GET['add'])) {
-                if ($_GET['add'] === 'true') {
-                    $this->$model->addData($_GET);
+    public function apiHandler($model)
+    {
+        $data = $this->$model->loadAll();
+        if (isset($_GET['add'])) {
+            if ($_GET['add'] === 'true') {
+                $this->$model->addData($_GET);
+                $this->core->redirect('/api/'.$model);
+            }
+            else {
+                $this->set('json', json_encode(array('message' => 'Error: GET parameter is wrong!')));
+            }
+        }
+        elseif (isset($_GET['edit'])) {
+            $data = $this->$model->loadById($_GET['id']);
+            $object = json_decode(json_encode($data), FALSE);
+            if ($_GET['edit'] === 'true') {
+                if(!isset($object[0]->id))
+                {
+                    $this->set('json', json_encode(array('message' => 'Error: ID doesnt exist!')));
+                }
+                else {
+                    $this->$model->editData($object[0]->id, $_GET);
                     $this->core->redirect('/api/'.$model);
-                }
-                else {
-                    $this->set('json', json_encode('Error: GET parameter is wrong!'));
-                }
-            }
-            elseif (isset($_GET['edit'])) {
-                $data = $this->$model->loadById($_GET['id']);
-                if ($_GET['edit'] === 'true') {
-                    if(!isset($data[0]['id']))
-                    {
-                        $this->set('json', json_encode('Error: ID doesnt exist!'));
-                    }
-                    else {
-                        $this->$model->editData($data[0]['id'], $_GET);
-                        $this->core->redirect('/api/'.$model);
-                    }
-                }
-                else {
-                    $this->set('json', json_encode('Error: GET parameter is wrong!'));
-                }
-            }
-            elseif (isset($_GET['delete'])) {
-                $data = $this->$model->loadById($_GET['id']);
-                if ($_GET['delete'] === 'true') {
-                    if(!isset($data[0]['id']))
-                    {
-                        $this->set('json', json_encode('Error: ID doesnt exist!'));
-                    }
-                    else {
-                        $this->$model->deleteData($_GET['id']);
-                        $this->core->redirect('/api/'.$model);
-                    }
-                }
-                else {
-                    $this->set('json', json_encode('Error: GET parameter is wrong!'));
                 }
             }
             else {
-                $this->set('json', json_encode($data));
+                $this->set('json', json_encode(array('message' => 'Error: GET parameter is wrong!')));
+            }
+        }
+        elseif (isset($_GET['delete'])) {
+            $data = $this->$model->loadById($_GET['id']);
+            $object = json_decode(json_encode($data), FALSE);
+            if ($_GET['delete'] === 'true') {
+                if(!isset($object[0]->id))
+                {
+                    $this->set('json', json_encode(array('message' => 'Error: ID doesnt exist!')));
+                }
+                else {
+                    $this->$model->deleteData($_GET['id']);
+                    $this->core->redirect('/api/'.$model);
+                }
+            }
+            else {
+                $this->set('json', json_encode(array('message' => 'Error: GET parameter is wrong!')));
             }
         }
         else {
-            $this->set('json', json_encode('Error: Page doesnt exist!'));
-            $this->core->redirect('/error');
+            $this->set('json', json_encode(array('message' => 'Success', 'list' => $data)));
         }
     }
 }
