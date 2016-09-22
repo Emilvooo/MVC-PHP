@@ -29,8 +29,8 @@ class galleryController extends Controller
                 $ext = explode('.', basename($_FILES['files']['name'][$i]));
                 $newFilePath = '../mvc/images/'.md5(uniqid()).'.'.$ext[count($ext) - 1];
                 if(move_uploaded_file($_FILES['files']['tmp_name'][$i], $newFilePath)) {
-                    $this->set('message', 'The images have been uploaded.');
                     $this->gallery->addData(str_replace('../mvc/images/', '', $newFilePath));
+                    $this->core->redirect('/gallery/index');
                 }
             }
         }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c2b06337-fcf8-40a5-b4b9-7a3b4fc86167" name="ftp.baansportfansite.nl" url="http://ftp.baansportfansite.nl">
+        <fileTransfer host="ftp.baansportfansite.nl" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

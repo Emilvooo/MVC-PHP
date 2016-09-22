@@ -28,42 +28,55 @@ class newsController extends Controller
     {
         $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
         $data = $this->news->loadById($id);
+
         if(!isset($data[0]['id'])) {
             $this->core->redirect('/error');
         }
+
         $object = json_decode(json_encode($data), FALSE);
         $this->set('data', $object);
     }
 
     public function add()
     {
-        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
-        if(!empty($_POST)) {
-            if(!isset($id)) {
+        $empty = $this->valid->isEmpty($_POST, array('author', 'title', 'content', 'price', 'type'));
+        $this->set('error', $empty);
+        if ($empty === true) {
+            $valid = $this->valid->isValid($_POST, array('email' => 'title', 'number' => 'price'));
+            $this->set('error', $valid);
+            if ($valid === true) {
                 $this->news->addData($_POST);
+                $this->core->redirect('/news/overview');
             }
-            else {
+        }
+    }
+
+    public function edit()
+    {
+        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
+
+        $data = $this->news->loadById($id);
+        $object = json_decode(json_encode($data), FALSE);
+
+        $empty = $this->valid->isEmpty($_POST, array('author', 'title', 'content', 'price', 'type'));
+        $this->set('error', $empty);
+        if ($empty === true) {
+            $valid = $this->valid->isValid($_POST, array('email' => 'title', 'number' => 'price'));
+            $this->set('error', $valid);
+            if ($valid === true) {
                 $this->news->editData($id, $_POST);
+                $this->core->redirect('/news/overview');
             }
-            $this->core->redirect('/news/overview');
         }
-        if(isset($id)) {
-            $data = $this->news->loadById($id);
-            $object = json_decode(json_encode($data), FALSE);
-            $this->set('data', $object);
-        }
+
+        $this->set('data', $object);
     }
 
     public function delete()
     {
         $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
-        if(!empty($_POST)) {
-            $this->news->deleteData($id);
-            $this->core->redirect('/news/overview');
-        }
-        $data = $this->news->loadById($id);
-        $object = json_decode(json_encode($data), FALSE);
-        $this->set('data', $object);
+        $this->news->deleteData($id);
+        $this->core->redirect('/news/overview');
     }
 }
 ?>

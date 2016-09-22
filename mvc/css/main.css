@@ -11,3 +11,7 @@
     height: 150px !important;
     width: 250px !important;
 }
+
+.form-control {
+    height: auto;
+}
