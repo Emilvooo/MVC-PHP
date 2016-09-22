@@ -16,7 +16,7 @@
                 <a class="navbar-brand hidden-xs-down" href="/"><b>EMILVOOO</b></a>
                 <ul class="nav navbar-nav">
                     <li class="nav-item"><a href="/">Home</a></li>
-                    <li class="nav-item"><a href="/news/overview">News</a></li>
+                    <li class="nav-item"><a href="/news/index">News</a></li>
                     <li class="nav-item"><a href="/gallery/index">Gallery</a></li>
                     <li class="nav-item"><a href="/contact/index">Contact</a></li>
                 </ul>

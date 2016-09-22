@@ -21,7 +21,7 @@ class Core
 
     private function startController()
     {
-        $controller = isset($this->params['controller']) ? $this->params['controller'] : 'content';
+        $controller = isset($this->params['controller']) ? $this->params['controller'] : 'home';
         $action = isset($this->params['action']) ? $this->params['action'] : 'index';
         $controller_path = '../app/controllers/'.$controller.'Controller.php';
 

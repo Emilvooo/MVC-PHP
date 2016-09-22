@@ -39,17 +39,12 @@ class galleryController extends Controller
     public function delete()
     {
         $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
-        if(!empty($_POST)) {
-            $file_path = $this->gallery->loadById($id);
-            $file = '../mvc/images/'.$file_path[0]['path'];
-            if (unlink($file)) {
-                $this->gallery->deleteData($id);
-                $this->core->redirect('/gallery/index');
-            }
+        $file_path = $this->gallery->loadById($id);
+        $file = '../mvc/images/'.$file_path[0]['path'];
+        if (unlink($file)) {
+            $this->gallery->deleteData($id);
+            $this->core->redirect('/gallery/index');
         }
-        $data = $this->gallery->loadById($id);
-        $object = json_decode(json_encode($data), FALSE);
-        $this->set('message', $object);
     }
 }
 ?>

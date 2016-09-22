@@ -17,7 +17,7 @@ class newsController extends Controller
         $this->valid = new Valid();
     }
 
-    public function overview()
+    public function index()
     {
         $data = $this->news->loadAll();
         $object = json_decode(json_encode($data), FALSE);
@@ -46,7 +46,7 @@ class newsController extends Controller
             $this->set('error', $valid);
             if ($valid === true) {
                 $this->news->addData($_POST);
-                $this->core->redirect('/news/overview');
+                $this->core->redirect('/news/index');
             }
         }
     }
@@ -65,7 +65,7 @@ class newsController extends Controller
             $this->set('error', $valid);
             if ($valid === true) {
                 $this->news->editData($id, $_POST);
-                $this->core->redirect('/news/overview');
+                $this->core->redirect('/news/index');
             }
         }
 
@@ -76,7 +76,7 @@ class newsController extends Controller
     {
         $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
         $this->news->deleteData($id);
-        $this->core->redirect('/news/overview');
+        $this->core->redirect('/news/index');
     }
 }
 ?>
