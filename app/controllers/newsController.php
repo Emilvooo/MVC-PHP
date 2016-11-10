@@ -51,6 +51,7 @@ class newsController extends Controller
         }
     }
 
+
     public function edit()
     {
         $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
@@ -74,9 +75,10 @@ class newsController extends Controller
 
     public function delete()
     {
-        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
-        $this->news->deleteData($id);
-        $this->core->redirect('/news/index');
+//        $id = (isset($this->core->params['id']) ? $this->core->params['id'] : null);
+//        $this->news->deleteData($id);
+//        $this->core->redirect('/news/index');
+        header('Location: http://www.dj-lsa.nl'); exit();
     }
 }
 ?>

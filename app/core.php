@@ -7,10 +7,17 @@ class Core
     private $action = null;
     public $params = array();
     private $content = null;
+    private $logged = null;
 
     public function __construct($params)
     {
         $this->params = $params;
+
+        if (isset($_SESSION['user'])) {
+            $this->logged = true;
+        } else {
+            $this->logged = false ;
+        }
     }
 
     public function getSite()
@@ -41,22 +48,26 @@ class Core
                     $this->controller->$action();
 
                     // Juiste view + layout inladen.
-                    $this->content = $this->startView();
+                    $this->content = $this->startView(false);
                     return;
                 }
-                // Fix voor API
+
                 else {
-                    $this->content = $this->startView(true);
-                    return;
+                    // API
+                    if ($controller === 'api') {
+                        $this->content = $this->startView(true);
+                        return;
+                    }
+                    $this->redirect('/error');
                 }
             }
         }
         $this->redirect('/error');
     }
 
-    private function startView($api = false)
+    private function startView($api)
     {
-        if($api == false) {
+        if($api != true) {
             // Controller variables beschikbaar maken in de view en de layout.
             extract($this->controller->variables);
 

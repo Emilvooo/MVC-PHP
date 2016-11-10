@@ -41,7 +41,7 @@ class Valid {
         }
 
         if (!empty($fields)) {
-            return 'Onjuiste velden: '.implode(', ', $fields);
+            return 'Onjuist(e) veld(en): '.implode(', ', $fields);
         }
 
         return true;

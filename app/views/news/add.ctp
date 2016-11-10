@@ -1,13 +1,13 @@
 <form id="commentForm" method="post">
     <fieldset>
-            <?php
-            if (!empty($error)) {
-                echo '        
-                <div class="alert alert-warning">
-                    '.$error.'
+        <?php
+            if ($error) {
+                echo
+                '<div class="alert alert-warning">
+                  '.$error.'
                 </div>';
-            }
-            ?>
+        }
+        ?>
         <div class="form-group">
             <label for="cauthor">Author (required)</label>
             <input id="cauthor" class="form-control" name="author" type="text" value="<?php echo (isset($data[0]->author) ? $data[0]->author : '')?>">

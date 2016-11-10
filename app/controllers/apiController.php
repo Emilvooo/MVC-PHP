@@ -35,7 +35,7 @@ class apiController extends Controller
         $data = $this->$model->loadAll();
         if (isset($_GET['add'])) {
             if ($_GET['add'] === 'true') {
-                $this->$model->addData($_GET);
+                $this->$model->addData($_POST);
                 $this->core->redirect('/api/'.$model);
             }
             else {
@@ -51,8 +51,8 @@ class apiController extends Controller
                     $this->set('json', json_encode(array('message' => 'Error: ID doesnt exist!')));
                 }
                 else {
-                    $this->$model->editData($object[0]->id, $_GET);
-                    $this->core->redirect('/api/'.$model);
+                    $postdata = (array)json_decode(trim(file_get_contents('php://input')));
+                    $this->$model->editData($_GET['id'], $postdata);
                 }
             }
             else {
@@ -68,7 +68,7 @@ class apiController extends Controller
                     $this->set('json', json_encode(array('message' => 'Error: ID doesnt exist!')));
                 }
                 else {
-                    $this->$model->deleteData($_GET['id']);
+                    $this->$model->deleteData($_POST['id']);
                     $this->core->redirect('/api/'.$model);
                 }
             }

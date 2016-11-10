@@ -4,6 +4,7 @@ RewriteBase /
 RewriteRule ^([\w-]+)/([\w-]+)/([\w-]+)/?$ index.php?controller=$1&action=$2&id=$3&%{QUERY_STRING} [L]
 RewriteRule ^([\w-]+)/([\w-]+)/?$ index.php?controller=$1&action=$2&%{QUERY_STRING} [L]
 RewriteRule ^([\w-]+)/?$ index.php?controller=$1&%{QUERY_STRING} [L]
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-</IfModule>
+
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"

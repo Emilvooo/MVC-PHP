@@ -24,15 +24,15 @@ class News
     public function addData($get_data) {
         $db = db::getInstance();
         $result = $db->prepare('INSERT INTO posts (author, title, content, price, type) VALUES (:author, :title, :content, :price, :type)');
-        $result->execute(array(':author'=>$get_data['author'], ':title'=>$get_data['title'], ':content'=>$get_data['content'], ':price'=>$get_data['price'], ':type'=>$get_data['type']));
+        $result->execute(array(':author'=>htmlentities($get_data['author']), ':title'=>htmlentities($get_data['title']), ':content'=>htmlentities($get_data['content']), ':price'=>htmlentities($get_data['price']), ':type'=>htmlentities($get_data['type'])));
 
         return $result;
     }
 
     public function editData($id, $get_data) {
         $db = db::getInstance();
-        $result = $db->prepare('UPDATE posts SET author=:author, title=:title, content=:content WHERE id= '.$id);
-        $result->execute(array(':author'=>$get_data['author'], ':title'=>$get_data['title'], ':content'=>$get_data['content'], ':price'=>$get_data['price'], ':type'=>$get_data['type']));
+        $result = $db->prepare('UPDATE posts SET author=:author, title=:title, content=:content, price=:price, type=:type WHERE id= '.$id);
+        $result->execute(array(':author'=>htmlentities($get_data['author']), ':title'=>htmlentities($get_data['title']), ':content'=>htmlentities($get_data['content']), ':price'=>htmlentities($get_data['price']), ':type'=>htmlentities($get_data['type'])));
 
         return $result;
     }

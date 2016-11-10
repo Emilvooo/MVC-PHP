@@ -9,4 +9,3 @@ class contactController extends Controller
         $this->set('data', 'Dit is een contact pagina!');
     }
 }
-?>
